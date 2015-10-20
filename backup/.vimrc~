@@ -1,0 +1,4 @@
+source ~/.vim/vimrcs/general.vim
+source ~/.vim/vimrcs/keymap.vim
+source ~/.vim/vimrcs/plugin.vim
+source ~/.vim/vimrcs/vundle.vim

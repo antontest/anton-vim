@@ -83,6 +83,7 @@ hi MarkWord6  ctermbg=Blue     ctermfg=Black  guibg=#9999FF    guifg=Black
 if exists('g:loaded_mark') && !exists('g:force_reload_mark')
 	finish
 endif
+let g:loaded_mark=1
 
 " Support for |line-continuation|
 let s:save_cpo = &cpo
