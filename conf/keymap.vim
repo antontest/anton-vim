@@ -79,7 +79,10 @@ vnoremap <silent> <leader>tt :execute 'tabnext ' . g:last_active_tab<cr>
 autocmd TabLeave * let g:last_active_tab = tabpagenr()
 
 " fast edite and resource .vimrc
-nnoremap <Leader>x  :tabedit ~/.vimrc<CR>  " Fast edit the .vimrc file using ,x
+nnoremap <Leader>x  :tabedit ~/.vimrc<CR>                  " Fast edit the .vimrc file using ,x
+nnoremap <Leader>b  :tabedit ~/.vim/vimrcs/bundle.vim<CR>  " Fast edit the .vimrc file using ,x
+nnoremap <Leader>p  :tabedit ~/.vim/vimrcs/plugin.vim<CR>  " Fast edit the .vimrc file using ,x
+nnoremap <Leader>k  :tabedit ~/.vim/vimrcs/keymap.vim<CR>  " Fast edit the .vimrc file using ,x
 nnoremap <Leader>rs :source ~/.vimrc<CR>
 
 " Space to toggle and create folds.

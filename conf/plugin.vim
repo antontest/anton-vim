@@ -572,7 +572,7 @@ let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 " <TAB>: completion.
 " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 " inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 " inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
@@ -683,8 +683,8 @@ let g:clang_periodic_quickfix=1
 let g:clang_snippets=1
 let g:clang_snippets_engine="clang_complete"
 let g:clang_conceal_snippets=1
-let g:clang_user_options='-stdlib=libc++ -std=c++11 -I~/tools/include'
-let g:clang_user_options+='|| exit 0'
+" let g:clang_user_options='-I~/tools/include -I/usr/include || exit 0'
+let g:clang_user_options=''
 let g:clang_auto_user_options="path,.clang_complete"
 let g:clang_use_library=1
 " let g:clang_library_path="~/etc/lib"
@@ -692,8 +692,9 @@ let g:clang_sort_algo="priority"
 let g:clang_complete_macros=1
 let g:clang_complete_patterns=0
 let g:clang_close_preview=1
-let g:clang_hl_errors=1
+let g:clang_hl_errors=0
 set pumheight=20              " Limit popup menu height
+let g:clang_memory_percent=70 " Limit memory use
 
 " SuperTab completion fall-back 
 " let g:SuperTabDefaultCompletionType='<c-x><c-o>'
@@ -705,7 +706,7 @@ imap <C-k>  <esc><tab>
 set completeopt=menu,menuone
 
 " SuperTab completion fall-back 
-let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
+" let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
 
 "*****************************************************
 ""                  Path Complete                    *
@@ -718,6 +719,22 @@ imap <C-l> <C-X><C-F>
 let g:inccomplete_showdirs=1
 let g:inccomplete_appendslash=1
 let b:inccomplete_root=1
+
+"*****************************************************
+""                   AutoComplPop                    *
+"*****************************************************
+let g:acp_behaviorKeywordLength = 1  
+let g:AutoComplPop_MappingDriven = 1  
+ "color  
+" hi Pmenu guibg=#444444  
+" hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff  
+
+let g:AutoComplPop_Behavior = { 
+\ 'c': [ {'command' : "\\",
+\ 'pattern' : ".",
+\ 'repeat' : 0}
+\ ] 
+\}
 
 "*****************************************************
 ""                      Vundle                       *

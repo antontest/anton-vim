@@ -90,12 +90,12 @@ Bundle 'scrooloose/nerdcommenter'
 " Bundle 'Shougo/neosnippet'
 " Bundle 'Shougo/neosnippet-snippets'
 Bundle 'tsaleh/vim-supertab'
-Bundle 'Shougo/vimshell.vim'  
+" Bundle 'Shougo/vimshell.vim'  
 Bundle 'drmingdrmer/xptemplate' 
 Bundle 'xaizek/vim-inccomplete'
 Bundle 'vim-scripts/echofunc.vim'
 Bundle 'tpope/vim-repeat'
-" Bundle 'vim-scripts/AutoComplPop'
+Bundle 'vim-scripts/AutoComplPop'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
