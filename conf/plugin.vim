@@ -61,18 +61,6 @@ let g:multi_cursor_quit_key='<Esc>'
 let g:multi_cursor_start_key='<C-n>'
 let g:multi_cursor_start_word_key='g<C-n>'
 
-"*****************************************************
-""                    Syntastic                      *
-"*****************************************************
-let g:syntastic_check_on_open=1
-let g:syntastic_aggregate_errors=1
-let g:syntastic_auto_jump=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_error_symbol = '?'
-let g:syntastic_style_error_symbol = '?'
-let g:syntastic_warning_symbol = '?'
-let g:syntastic_style_warning_symbol = '≈'
-
 
 "*****************************************************
 ""                  miniBufexplorer                  *
@@ -94,6 +82,19 @@ let g:miniBufExplorerMoreThanOne=2
 ""--------------------------------------------------------------------
 "" => Status line
 ""--------------------------------------------------------------------
+"*****************************************************
+""              vim-indent-guides                    *
+"*****************************************************
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_start_level = 1 " 2
+let g:indent_guides_guide_size = 1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+hi IndentGuidesOdd  ctermbg=black
+hi IndentGuidesEven ctermbg=darkgrey
+
+
 "*****************************************************
 ""                     echofunc                      *
 "*****************************************************
@@ -309,10 +310,42 @@ nnoremap <Leader>u :UndotreeToggle<CR>
 ""--------------------------------------------------------------------
 
 "*****************************************************
+""                vim-expand-region                  *
+"*****************************************************
+let g:expand_region_use_select_mode = 1
+
+" Default settings. (NOTE: Remove comments in dictionary before sourcing)
+let g:expand_region_text_objects = {
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :0,
+      \ 'i''' :0,
+      \ 'i]'  :1,
+      \ 'ib'  :1, 
+      \ 'iB'  :1,
+      \ 'il'  :0, 
+      \ 'ip'  :0,
+      \ 'ie'  :0,
+      \ }
+
+" Extend the global default (NOTE: Remove comments in dictionary before sourcing)
+call expand_region#custom_text_objects({
+      \ "\/\\n\\n\<CR>": 1,
+      \ 'a]' :1, 
+      \ 'ab' :1,
+      \ 'aB' :1, 
+      \ 'ii' :0, 
+      \ 'ai' :0,
+      \ })
+
+map K <Plug>(expand_region_expand)
+map J <Plug>(expand_region_shrink)
+
+"*****************************************************
 ""                       cscope                      *
 "*****************************************************
 if has("cscope")
-    set csprg=/usr/local/bin/cscope
+    set csprg=/usr/bin/cscope
     set csto=1
     set nocst
     set cspc=6
@@ -444,9 +477,21 @@ nmap ga <Plug>(EasyAlign)
 let g:indentLine_color_term = 239
 let g:indentLine_char = '¦'
 
+
 ""--------------------------------------------------------------------
 "" => Code Complete
 ""--------------------------------------------------------------------
+"*****************************************************
+""                  Path Complete                    *
+"*****************************************************
+imap <C-l> <C-X><C-F>
+
+"*****************************************************
+""                 Include Complete                  *
+"*****************************************************
+let g:inccomplete_showdirs=1
+let g:inccomplete_appendslash=1
+let b:inccomplete_root=1
 
 "*****************************************************
 ""                     supertab                      *
@@ -456,34 +501,6 @@ let g:SuperTabRetainCompletionType=2
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 let g:SuperTabClosePreviewOnPopupClose = 1
-
-"*****************************************************
-""                      ultisnips                    *
-"*****************************************************
-let g:UltiSnipsUsePythonVersion = 3
-let g:UltiSnipsSnippetDirectories=['UltiSnips']
-let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
-let g:UltiSnipsExpandTrigger="<F2>"
-let g:UltiSnipsJumpForwardTrigger = '<Tab>'
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
-
-"*****************************************************
-""                OmniCppComplete                    *
-"*****************************************************
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1 
-let OmniCpp_ShowPrototypeInAbbr = 1 " 显示函数参数列表 
-let OmniCpp_MayCompleteDot = 1   " 输入 .  后自动补全
-let OmniCpp_MayCompleteArrow = 1 " 输入 -> 后自动补全 
-let OmniCpp_MayCompleteScope = 1 " 输入 :: 后自动补全 
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-" 自动关闭补全窗口 
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif 
-" set completeopt=menuone,menu,longest
-" highlight Pmenu    guibg=darkgrey  guifg=black 
-" highlight PmenuSel guibg=lightgrey guifg=black
 
 
 "*****************************************************
@@ -515,162 +532,8 @@ endfunction "}}}
 
 let g:xptemplate_key = '<Plug>triggerxpt'
 inoremap <Plug>closePUM <C-v><C-v><BS>
-imap <TAB> <Plug>closePUM<Plug>triggerxpt
+imap <tab> <Plug>closePUM<Plug>triggerxpt
 let g:xptemplate_fallback = 'nore:<TAB>' " Optional. Use this only when you have no other plugin like SuperTab to handle <TAB>.
-
-"*****************************************************
-""                  NeoComplCache                    *
-"*****************************************************
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
-" Use underbar completion.
-let g:neocomplcache_enable_underbar_completion = 1
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplcache_enable_quick_match = 1
-" AutoComplPop like behavior.
-" let g:neocomplcache_enable_auto_select = 1
-
-" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-    \ }
-let g:neocomplcache_snippets_dir=$VIMFILES."/snippets" 
-
-" Enable heavy omni completion.
-if !exists('g:neocomplcache_omni_patterns')
-    let g:neocomplcache_omni_patterns = {}
-endif
-" let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-" let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-" let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-" let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
-
-if !exists("g:neocomplcache_include_paths")
-	let g:neocomplcache_include_paths={}
-endif
-let g:neocomplcache_include_paths.c='/usr/include/'
-
-" Define keyword.
-if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
-endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-"<CR>: close popup and save indent.
-" inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-" <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-" inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-" inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-" inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
-" Close popup by <Space>.
-" inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
-" NeoComplCache
-inoremap <expr><space>  pumvisible() ? neocomplcache#close_popup() . "\<SPACE>" : "\<SPACE>"
-
-
-"*****************************************************
-""                     Neosnippet                    *
-"*****************************************************
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<TAB>" : "\<Plug>(neosnippet_expand_or_jump)"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
-
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/snippets'
-
-
-"*****************************************************
-""                  YouCompleteMe                    *
-"*****************************************************
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_server_use_vim_stdout = 0
-let g:ycm_server_keep_logfiles = 1
-let g:ycm_server_log_level = 'debug'
-let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'  
-
-" 自动补全配置
-" set completeopt=longest,menu	"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif	"离开插入模式后自动关闭预览窗口
-
-"youcompleteme  默认tab  s-tab 和自动补全冲突
-"let g:ycm_key_list_select_completion=['<c-n>']
-let g:ycm_key_list_select_completion = ['<Down>']
-"let g:ycm_key_list_previous_completion=['<c-p>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_confirm_extra_conf=1 "关闭加载.ycm_extra_conf.py提示
-let g:ycm_collect_identifiers_from_tag_files = 1  
-
-"设置error和warning的提示符，如果没有设置，ycm会以syntastic的
-" g:syntastic_warning_symbol 和 g:syntastic_error_symbol 这两个为准
-let g:ycm_error_symbol='>>'
-let g:ycm_warning_symbol='>*'
-
-let g:ycm_collect_identifiers_from_tags_files=1	" 开启 YCM 基于标签引擎
-let g:ycm_min_num_of_chars_for_completion=2	" 从第2个键入字符就开始罗列匹配项
-" let g:ycm_cache_omnifunc=0	" 禁止缓存匹配项,每次都重新生成匹配项
-let g:ycm_seed_identifiers_with_syntax=1	" 语法关键字补全
-let g:ycm_echo_current_diagnostic = 1
-
-"在注释输入中也能补全
-let g:ycm_complete_in_comments = 1
-"在字符串输入中也能补全
-let g:ycm_complete_in_strings = 1
-"注释和字符串中的文字也会被收入补全
-let g:ycm_collect_identifiers_from_comments_and_strings = 0
-"不查询ultisnips提供的代码模板补全，如果需要，设置成1即可
-let g:ycm_use_ultisnips_completer=0
-"直接触发自动补全
-" let g:ycm_key_invoke_completion = ''
-
-" YouCompleteMe Key Binding
-" 自动补全配置
-inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"	"回车即选中当前项
-"上下左右键的行为 会显示其他信息
-inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>	"force recomile with syntastic
-nnoremap <F4> :YcmShowDetailedDiagnostic<CR>	"force recomile with syntastic
-"nnoremap <leader>ll :lopen<CR>	"open locationlist
-"nnoremap <leader>lc :lclose<CR>	"close locationlist
-inoremap <leader><leader> <C-x><C-o>
-"设置跳转的快捷键，可以跳转到definition和declaration
-nnoremap <leader>gc :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 
 "*****************************************************
@@ -699,8 +562,8 @@ let g:clang_memory_percent=70 " Limit memory use
 " SuperTab completion fall-back 
 " let g:SuperTabDefaultCompletionType='<c-x><c-o>'
 nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
-imap <C-j>  <esc><tab>
-imap <C-k>  <esc><tab>
+" imap <C-i>  <esc><tab>
+" imap <C-k>  <esc><tab>
 
 " Complete options (disable preview scratch window, longest removed to aways show menu)
 set completeopt=menu,menuone
@@ -708,33 +571,34 @@ set completeopt=menu,menuone
 " SuperTab completion fall-back 
 " let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
 
-"*****************************************************
-""                  Path Complete                    *
-"*****************************************************
-imap <C-l> <C-X><C-F>
-
-"*****************************************************
-""                 Include Complete                  *
-"*****************************************************
-let g:inccomplete_showdirs=1
-let g:inccomplete_appendslash=1
-let b:inccomplete_root=1
 
 "*****************************************************
 ""                   AutoComplPop                    *
 "*****************************************************
-let g:acp_behaviorKeywordLength = 1  
+let g:acp_enableAtStartup = 1
+let g:acp_ignorecaseOption = 1
+" let g:acp_behaviorSnipmateLength = 1
+let g:acp_behaviorKeywordLength = 2 
 let g:AutoComplPop_MappingDriven = 1  
+let g:acp_completeOption = '.,w,b,k'
+let g:acp_behaviorFileLength = 1
+let g:acp_behaviorKeywordCommand = "\<C-n>"
  "color  
 " hi Pmenu guibg=#444444  
 " hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff  
+let g:AutoComplPop_Behavior = {
+    \ 'c': [ {'command' : "\\",
+    \ 'pattern' : ".",
+    \ 'repeat' : 0}
+    \ ]
+    \}
 
-let g:AutoComplPop_Behavior = { 
-\ 'c': [ {'command' : "\\",
-\ 'pattern' : ".",
-\ 'repeat' : 0}
-\ ] 
-\}
+"*****************************************************
+""                 TTrCodeAssistor                   *
+"*****************************************************
+let g:TTrCodeAssistor_AutoStart=1 
+nnoremap <F1> :call TTrCodeAssistor_ToggleComments()<CR>
+vnoremap <F1> :call TTrCodeAssistor_ToggleComments()<CR> 
 
 "*****************************************************
 ""                      Vundle                       *

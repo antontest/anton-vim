@@ -39,13 +39,22 @@ Plugin 'VundleVim/Vundle.vim'
 " Bundle 'ervandew/supertab'
 " Bundle 'justmao945/vim-clang'
 " Bundle 'vim-scripts/c.vim'
+" Bundle 'bling/vim-bufferline'
+" Bundle 'plasticboy/vim-markdown'
+" Bundle 'gcmt/wildfire.vim'
+" Bundle 'jiangmiao/auto-pairs'
+" Bundle 'Shougo/neocomplcache.vim'
+" Bundle 'Shougo/neosnippet'
+" Bundle 'Shougo/neosnippet-snippets'
+" Bundle 'Shougo/vimshell.vim' 
+" Bundle 'vim-scripts/AutoComplPop'
+" Bundle 'garbas/vim-snipmate'
 
 " Plugin Running
 "" others
 """""""""""""""""""""""""""""""""""""""""
 Bundle 'itchyny/calendar.vim'
 Bundle 'vim-scripts/sessionman.vim'
-" Bundle 'plasticboy/vim-markdown'
 
 "" status and list bar
 """"""""""""""""""""""""""""""""""""""
@@ -55,6 +64,8 @@ Bundle 'bling/vim-airline'
 Bundle 'vim-scripts/undotree.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'wellle/targets.vim'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'mhinz/vim-signify'
 
 "" code style
 Bundle 'godlygeek/tabular'
@@ -70,6 +81,7 @@ Bundle 'dkprice/vim-easygrep'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'kristijanhusak/vim-multiple-cursors'
+Bundle 'terryma/vim-expand-region'
 
 "" git amd man enhance
 """""""""""""""""""""""""""""""""""""""""
@@ -85,17 +97,16 @@ Bundle 'scrooloose/nerdcommenter'
 
 "" code auto complete
 """""""""""""""""""""""""""""""""""""""""
-" Bundle 'jiangmiao/auto-pairs'
-" Bundle 'Shougo/neocomplcache.vim'
-" Bundle 'Shougo/neosnippet'
-" Bundle 'Shougo/neosnippet-snippets'
 Bundle 'tsaleh/vim-supertab'
-" Bundle 'Shougo/vimshell.vim'  
 Bundle 'drmingdrmer/xptemplate' 
 Bundle 'xaizek/vim-inccomplete'
-Bundle 'vim-scripts/echofunc.vim'
+Bundle 'vim-scripts/L9'
+Bundle 'vim-scripts/TTrCodeAssistor'
+" Bundle 'vim-scripts/echofunc.vim'
 Bundle 'tpope/vim-repeat'
-Bundle 'vim-scripts/AutoComplPop'
+Bundle 'marcweber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'vim-scripts/AutoComplpop'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
