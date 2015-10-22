@@ -377,22 +377,6 @@ nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 " nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>    
 " nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR><CR>
 
-"****************************************************
-""                    Splitjoin                     *
-"****************************************************
-let g:splitjoin_split_mapping = ',s'
-let g:splitjoin_join_mapping  = ',j'
-let g:splitjoin_normalize_whitespace=1
-let g:splitjoin_align=1
-
-"*****************************************************
-""                    markdown                       *
-"*****************************************************
-au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
-au BufRead,BufNewFile *.{go}   set filetype=go
-au BufRead,BufNewFile *.{js}   set filetype=javascript
-let g:vim_markdown_frontmatter=1
-
 "*****************************************************
 ""                      ctrlp                        *
 "*****************************************************
@@ -428,14 +412,14 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
 
 " n-char motion 
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+map  ;/ <Plug>(easymotion-sn)
+omap ;/ <Plug>(easymotion-tn)
 
 " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
 " Without these mappings, `n` & `N` works fine. (These mappings just provide
 " different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
+map ;n <Plug>(easymotion-next)
+map ;N <Plug>(easymotion-prev)
 
 
 ""--------------------------------------------------------------------
@@ -539,9 +523,11 @@ let g:xptemplate_fallback = 'nore:<TAB>' " Optional. Use this only when you have
 "*****************************************************
 ""                  clang_complete                   *
 "*****************************************************
-let g:clang_auto_select=1
-let g:clang_complete_auto=1
-let g:clang_complete_copen=1
+set conceallevel=2
+set concealcursor=vin
+let g:clang_auto_select=1       " 弹出补全列表之后会自动选择第一个选项但不会生效
+let g:clang_complete_auto=1 
+let g:clang_complete_copen=1    " 该变量控制语法错误检查后是否打开quickfix窗口列表. 默认值是0表示不打开
 let g:clang_periodic_quickfix=1
 let g:clang_snippets=1
 let g:clang_snippets_engine="clang_complete"
@@ -555,21 +541,21 @@ let g:clang_sort_algo="priority"
 let g:clang_complete_macros=1
 let g:clang_complete_patterns=0
 let g:clang_close_preview=1
-let g:clang_hl_errors=0
+let g:clang_hl_errors=1
 set pumheight=20              " Limit popup menu height
 let g:clang_memory_percent=70 " Limit memory use
+let g:clang_jumpto_back_key="<a-t>"
+let g:clang_jumpto_declaration_key="<a-p>"
 
-" SuperTab completion fall-back 
-" let g:SuperTabDefaultCompletionType='<c-x><c-o>'
-nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
-" imap <C-i>  <esc><tab>
+" nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
 " imap <C-k>  <esc><tab>
+imap <F2>  <esc><tab>
 
 " Complete options (disable preview scratch window, longest removed to aways show menu)
 set completeopt=menu,menuone
 
 " SuperTab completion fall-back 
-" let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
+let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
 
 
 "*****************************************************
@@ -577,7 +563,7 @@ set completeopt=menu,menuone
 "*****************************************************
 let g:acp_enableAtStartup = 1
 let g:acp_ignorecaseOption = 1
-" let g:acp_behaviorSnipmateLength = 1
+" let g:acp_behaviorSnipmateLength = 2
 let g:acp_behaviorKeywordLength = 2 
 let g:AutoComplPop_MappingDriven = 1  
 let g:acp_completeOption = '.,w,b,k'

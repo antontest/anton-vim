@@ -320,7 +320,7 @@ set shiftround     " Indent/outdent to nearest tabstop
 set smartindent    " 开启新行的自动缩进
 set smarttab       " 根据 “shiftwidth” 插入空白
 set tabstop=4 
-set formatoptions=tcrqn
+" set formatoptions=tcrqn
 set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,node_modules/*
 "Format C code
 set et

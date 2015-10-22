@@ -55,6 +55,7 @@ Plugin 'VundleVim/Vundle.vim'
 """""""""""""""""""""""""""""""""""""""""
 Bundle 'itchyny/calendar.vim'
 Bundle 'vim-scripts/sessionman.vim'
+Bundle 'AndrewRadev/splitjoin.vim'
 
 "" status and list bar
 """"""""""""""""""""""""""""""""""""""
@@ -65,7 +66,6 @@ Bundle 'vim-scripts/undotree.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'wellle/targets.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'mhinz/vim-signify'
 
 "" code style
 Bundle 'godlygeek/tabular'
@@ -86,8 +86,9 @@ Bundle 'terryma/vim-expand-region'
 "" git amd man enhance
 """""""""""""""""""""""""""""""""""""""""
 Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-gitgutter'
+" Bundle 'airblade/vim-gitgutter'
 Bundle 'vim-utils/vim-man'
+Bundle 'mhinz/vim-signify'
 
 "" code comment
 """""""""""""""""""""""""""""""""""""""""
