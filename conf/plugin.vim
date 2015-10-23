@@ -544,18 +544,27 @@ let g:clang_close_preview=1
 let g:clang_hl_errors=1
 set pumheight=20              " Limit popup menu height
 let g:clang_memory_percent=70 " Limit memory use
-let g:clang_jumpto_back_key="<a-t>"
-let g:clang_jumpto_declaration_key="<a-p>"
-
-" nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
-" imap <C-k>  <esc><tab>
-imap <F2>  <esc><tab>
+" let g:clang_jumpto_back_key="<a-t>"
+" let g:clang_jumpto_declaration_key="<a-p>"
 
 " Complete options (disable preview scratch window, longest removed to aways show menu)
 set completeopt=menu,menuone
 
 " SuperTab completion fall-back 
 let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
+
+" imap <C-k>  <esc><tab>
+imap <F2>  <esc><tab>
+
+" nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
+ino <a-s> <esc>:call Show_error()<cr>a
+nno <a-s> <esc>:call Show_error()<cr>
+func! Show_error()
+   wall
+   if &filetype == 'c' || &filetype == 'cpp'
+      call g:ClangUpdateQuickFix()
+   endif
+endfunc
 
 
 "*****************************************************
