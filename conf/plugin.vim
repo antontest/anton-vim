@@ -261,12 +261,12 @@ let Tlist_Auto_Update = 1
 " set completeopt=preview,longest,menu,menuone
 " let Tlist_Sort_Type = "name"  " Sort by name
 " taglist Key Binding
-nnoremap <Leader>tl :Tlist<CR>
+" nnoremap <Leader>tl :Tlist<CR>
 
 "*****************************************************
 ""                    Tag bar                        *
 "*****************************************************
-nnoremap <Leader>tg :TagbarToggle<CR>
+nnoremap <Leader>t :TagbarToggle<CR>
 let g:tagbar_left = 1
 let g:tagbar_width=30
 let g:tagbar_autofocus=1
@@ -486,6 +486,29 @@ let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 let g:SuperTabClosePreviewOnPopupClose = 1
 
+let g:SuperTabLongestHighlight = 1
+let g:SuperTabLongestEnhanced = 1
+let g:SuperTabLeadingSpaceCompletion = 0
+let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+            \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+            \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>
+
+" open omni completion menu closing previous if open and opening new   menu without changing the text
+"inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ?
+"'<Esc>i<Right>' : '<Esc>i') : '') .
+"        \ '<C-x><C-o><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\
+"        <lt>Down>" : ""<CR>'
+" open user completion menu closing previous if open and opening new
+" menu without changing the text
+inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ?   '<Esc>i<Right>' : '<Esc>i') : '') .
+        \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\  <lt>Down>" : ""<CR>'
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 "*****************************************************
 ""                     xptemplate                    *
@@ -493,7 +516,7 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 " let g:xptemplate_lib_filter = '~/.vim/UltiSnips/'
 " xptemplate
 let g:xptemplate_vars = "SParg=&BRfun="			" 代码紧贴括号,函数名单行
-let g:xptemplate_brace_complete = "[{"		        " 括号引号自动补全	
+" let g:xptemplate_brace_complete = "[{"		        " 括号引号自动补全	
 
 " Prevent supertab from mapping <tab> to anything.
 let g:SuperTabMappingForward = '<Plug>xpt_void'
@@ -527,14 +550,12 @@ set conceallevel=2
 set concealcursor=vin
 let g:clang_auto_select=1       " 弹出补全列表之后会自动选择第一个选项但不会生效
 let g:clang_complete_auto=1 
-let g:clang_complete_copen=1    " 该变量控制语法错误检查后是否打开quickfix窗口列表. 默认值是0表示不打开
+let g:clang_complete_copen=0    " 该变量控制语法错误检查后是否打开quickfix窗口列表. 默认值是0表示不打开
 let g:clang_periodic_quickfix=1
-let g:clang_snippets=1
-let g:clang_snippets_engine="clang_complete"
 let g:clang_conceal_snippets=1
 " let g:clang_user_options='-I~/tools/include -I/usr/include || exit 0'
 let g:clang_user_options=''
-let g:clang_auto_user_options="path,.clang_complete"
+let g:clang_auto_user_options=".clang_complete"
 let g:clang_use_library=1
 " let g:clang_library_path="~/etc/lib"
 let g:clang_sort_algo="priority"
@@ -546,15 +567,23 @@ set pumheight=20              " Limit popup menu height
 let g:clang_memory_percent=70 " Limit memory use
 " let g:clang_jumpto_back_key="<a-t>"
 " let g:clang_jumpto_declaration_key="<a-p>"
+"
+" For Objective-C, this needs to be active, otherwise multi-parameter methods
+" won't be completed correctly
+let g:clang_snippets = 1
+let g:clang_snippets_engine = 'clang_complete'
+" let g:clang_snippets_engine = 'ultisnips'
 
 " Complete options (disable preview scratch window, longest removed to aways show menu)
 set completeopt=menu,menuone
+" set completeopt=menuone,menu,longest,preview
 
 " SuperTab completion fall-back 
-let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
+" let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
 
-" imap <C-k>  <esc><tab>
-imap <F2>  <esc><tab>
+imap <C-k>  <esc><tab>
+imap <C-j>  <esc><tab>
+" imap <F1>  <esc><tab>
 
 " nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
 ino <a-s> <esc>:call Show_error()<cr>a
@@ -572,21 +601,51 @@ endfunc
 "*****************************************************
 let g:acp_enableAtStartup = 1
 let g:acp_ignorecaseOption = 1
-" let g:acp_behaviorSnipmateLength = 2
-let g:acp_behaviorKeywordLength = 2 
 let g:AutoComplPop_MappingDriven = 1  
 let g:acp_completeOption = '.,w,b,k'
 let g:acp_behaviorFileLength = 1
 let g:acp_behaviorKeywordCommand = "\<C-n>"
+let g:AutoComplPop_CompleteoptPreview = 1
+" let g:acp_behaviorSnipmateLength = 2
+let g:acp_behaviorFileLength = 2
+let g:acp_behaviorKeywordLength = 2
+" let g:clang_exec='~/etc/bin/clang'
  "color  
 " hi Pmenu guibg=#444444  
 " hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff  
-let g:AutoComplPop_Behavior = {
-    \ 'c': [ {'command' : "\\",
-    \ 'pattern' : ".",
-    \ 'repeat' : 0}
-    \ ]
-    \}
+
+" let g:acp_refeed_checkpoints = [2]
+let g:acp_behavior = {
+      \ 'c':    [],
+      \ 'php':    [],
+      \ 'ruby':   [],
+      \ 'python': [],
+      \ 'less':   [],
+      \ 'scss':   [],
+      \ 'go':     [],
+      \ }
+
+call add(g:acp_behavior.c, {
+      \   'command'      : "\<C-x>\<C-f>",
+      \   'meets'        : 'acp#meetsForFile',
+      \   'repeat'       : 1,
+      \ })
+call add(g:acp_behavior.c, {
+      \   'command'      : "\<C-x>\<C-u>",
+      \   'meets'        : 'acp#meetsForSnipmate',
+      \   'repeat'       : 1,
+      \ })
+call add(g:acp_behavior.c, {
+      \   'command'      : "\<C-x>\<C-o>",
+      \   'meets'        : 'acp#meetsForKeyword',
+      \   'repeat'       : 1,
+      \ })
+call add(g:acp_behavior.c, {
+      \   'command'      : "\<C-x>\<C-n>",
+      \   'meets'        : 'acp#meetsForKeyword',
+      \   'repeat'       : 1,
+      \ })
+
 
 "*****************************************************
 ""                 TTrCodeAssistor                   *
@@ -594,6 +653,57 @@ let g:AutoComplPop_Behavior = {
 let g:TTrCodeAssistor_AutoStart=1 
 nnoremap <F1> :call TTrCodeAssistor_ToggleComments()<CR>
 vnoremap <F1> :call TTrCodeAssistor_ToggleComments()<CR> 
+
+"*****************************************************
+""                     syntastic                     *
+"*****************************************************
+" Show sidebar signs.
+let g:syntastic_enable_signs=1
+let g:syntastic_error_symbol = '>>'
+let g:syntastic_style_error_symbol = '>>'
+let g:syntastic_warning_symbol = '~~'
+let g:syntastic_style_warning_symbol = '~~'
+
+" Read the clang complete file
+let g:syntastic_objc_config_file = '.clang_complete'
+
+" Status line configuration
+set statusline+=%#warningmsg#  " Add Error ruler.
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_check_on_open = 1
+let g:syntastic_echo_current_error = 1
+let g:syntastic_enable_highlighting = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 2
+let g:syntastic_check_on_wq = 0
+let g:syntastic_shell = "/bin/bash"
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "active_filetypes": ["c", "cpp", 'objc', 'objcpp'],
+    \ "passive_filetypes": ["puppet"] }
+nnoremap <silent> ~ :Errors<CR>
+
+" tell it to use clang instead of gcc
+let g:SyntasticRegistry = {}
+let g:syntastic_c_compiler = 'clang'
+if !exists('g:syntastic_objc_checker')
+    if exists('g:loaded_youcompleteme')
+        let g:syntastic_objc_checker = "ycm"
+    else
+        let g:syntastic_objc_checker = "gcc"
+    endif
+endif
+
+if g:syntastic_objc_checker == "ycm"
+    " runtime! syntax_checkers/objc/ycm.vim
+elseif g:syntastic_objc_checker == "gcc" || g:syntastic_objc_checker == "clang"
+    if executable(g:syntastic_objc_checker)
+        " runtime! syntax_checkers/objc/gcc.vim
+    endif
+endif
 
 "*****************************************************
 ""                      Vundle                       *

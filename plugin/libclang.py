@@ -35,8 +35,7 @@ def getBuiltinHeaderPath(library_path):
           library_path + "/clang",         # opensuse
           library_path + "/",              # Google
           "/usr/lib64/clang",              # x86_64 (openSUSE, Fedora)
-          "/usr/lib/clang", 
-          "~/etc/lib"
+          "/usr/lib/clang"
   ]
 
   for path in knownPaths:
@@ -197,10 +196,8 @@ def getCurrentTranslationUnit(args, currentFile, fileName, timer,
 
 def splitOptions(options):
   # Use python's shell command lexer to correctly split the list of options in
-  # accordance with the POSIX standard if running a Unix system, or split
-  # according to Windows shell rules
-  posixMode = os.name == "posix"
-  return shlex.split(options, posix=posixMode)
+  # accordance with the POSIX standard
+  return shlex.split(options)
 
 def getQuickFix(diagnostic):
   # Some diagnostics have no file, e.g. "too many errors emitted, stopping now"
