@@ -10,6 +10,13 @@ filetype plugin indent on
 ""--------------------------------------------------------------------
 
 "*****************************************************
+""                      Vim-Man                      *
+"*****************************************************
+map <C-m> <Plug>(Man) "open man page for word under cursor in a horizontal split
+" map <C-M> <Plug>(Vman) "open man page for word under cursor in a vertical split
+
+
+"*****************************************************
 ""                     Calendar                      *
 "*****************************************************
 let g:calendar_frame = 'default'
@@ -312,7 +319,7 @@ nnoremap <Leader>u :UndotreeToggle<CR>
 "*****************************************************
 ""                vim-expand-region                  *
 "*****************************************************
-let g:expand_region_use_select_mode = 1
+" let g:expand_region_use_select_mode = 1
 
 " Default settings. (NOTE: Remove comments in dictionary before sourcing)
 let g:expand_region_text_objects = {
