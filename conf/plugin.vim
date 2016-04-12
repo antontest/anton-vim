@@ -118,10 +118,12 @@ let g:EchoFuncLangsUsed = ["c", "cpp", "java"]
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
+" let g:airline_symbols.space = "\ua0"
+
 " unicode symbols
 let g:airline_left_sep='?'  " Slightly fancier than '>'
 let g:airline_right_sep='?' " Slightly fancier than '<'
-let g:airline_theme='bubblegum'
+let g:airline_theme='simple'
 let g:bufferline_modified='[+]'
 let g:bufferline_echo=0
 set noshowmode " Hide the default mode text
@@ -130,18 +132,21 @@ set guifont=Ubuntu\ Mono\ derivative\ Powerline
 set laststatus=2
 set fillchars+=stl:\ ,stlnc:\
 " enable powerline-fonts
-" let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 " enable tabline
 let g:airline#extensions#tabline#enabled = 1
 " set left separator
 let g:airline#extensions#tabline#left_sep = ' '
 " set left separator which are not editting
 let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = '!'
 
 function! AirlineInit()
 	let g:airline#extensions#tabline#buffer_nr_show = 1
-	let g:airline_section_c = airline#section#create(['%{getcwd()}'])
-	let g:airline_section_z = airline#section#create(['Pos: %p%% %l/%L:%c '])
+	" let g:airline_section_b = airline#section#create(['%{getcwd()}'])
+	" let g:airline_section_b = '%{strftime("%c")}'
+	let g:airline_section_z = airline#section#create(['Pos: %p%% %l/%L:%c  '])
 endfunction
 autocmd User AirlineAfterInit call AirlineInit()
 
@@ -287,7 +292,7 @@ let g:tagbar_sort = 0
 "*****************************************************
 ""                     NERDTree                      *
 "*****************************************************
-let NERDTreeWinPos = 'right'
+let NERDTreeWinPos = 'left'     " left
 let NERDTreeChDirMode=2          "选中root即设置为当前目录
 let NERDTreeQuitOnOpen=1         "打开文件时关闭树
 let NERDTreeShowBookmarks=1      "显示书签
@@ -295,12 +300,12 @@ let NERDTreeMinimalUI=1          "不显示帮助面板
 let NERDTreeShowHidden=1         "目录箭头 1 显示箭头 0传统+-|号
 let NERDTreeShowLineNumbers=1
 let NERDTreeDirArrows=1
-let NERDTreeDirArrowExpandable = '▸'
-let NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 let nerdtree_tabs_open_on_gui_startup=0
 " NERDTree Key Binding
 nnoremap <Leader>d :NERDTreeToggle<CR>
-nnoremap <Leader>f :NERDTreeFind<CR>
+" nnoremap <Leader>f :NERDTreeFind<CR>
 
 
 "*****************************************************
@@ -352,26 +357,24 @@ map J <Plug>(expand_region_shrink)
 ""                       cscope                      *
 "*****************************************************
 if has("cscope")
-    set csprg=/usr/bin/cscope
+    set csprg=/usr/local/bin/cscope
     set csto=1
     set nocst
     set cspc=6
-    let g:autocscope_menus=0
+    let g:autocscope_menus=1
     set nocsverb
     " add any database in current directory
     if filereadable("cscope.out")
         cs add cscope.out
-        cs add /usr/include/cscope.out
-        cs add /home/anton/tools/include/cscope.out
     " else add database pointed to by environment
     elseif $CSCOPE_DB != ""
         cs add $CSCOPE_DB
-        cs add /usr/include/cscope.out
-        cs add /home/anton/tools/include/cscope.out
     endif
+    " cs add /usr/include/cscope.out
+    " cs add /home/anton/tools/include/cscope.out
     set csverb
     " show in quickbuffer
-    set cscopequickfix=s-,c-,d-,i-,t-,e-
+    " set cscopequickfix=s-,c-,d-,i-,t-,e-
 endif 
 
 " cscope Key Binding
@@ -387,10 +390,22 @@ nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 "*****************************************************
 ""                      ctrlp                        *
 "*****************************************************
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.png,*.jpg,*.gif     " MacOSX/Linux
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = '\v\.(exe|so|dll)$'
 let g:ctrlp_extensions = ['funky']
+let g:ctrlp_use_caching = 0
+if executable('ag')
+    set grepprg=ag
+ 
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings = {'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>']}
+endif
 
 
 "*****************************************************
@@ -408,15 +423,15 @@ let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 " Require tpope/vim-repeat to enable dot repeat support
 " Jump to anywhere with only `s{char}{target}`
 " `s<CR>` repeat last find motion.
-nmap s <Plug>(easymotion-s)
+nmap S <Plug>(easymotion-s)
 " Bidirectional & within line 't' motion
-omap t <Plug>(easymotion-bd-tl)
+omap T <Plug>(easymotion-bd-tl)
 
 " hjkl-motion
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
+map `l <Plug>(easymotion-lineforward)
+map `j <Plug>(easymotion-j)
+map `k <Plug>(easymotion-k)
+map `h <Plug>(easymotion-linebackward)
 
 " n-char motion 
 map  ;/ <Plug>(easymotion-sn)
@@ -465,8 +480,14 @@ nmap ga <Plug>(EasyAlign)
 "*****************************************************
 ""                   indentLine                      *
 "*****************************************************
+"let g:indentLine_enabled=0
 let g:indentLine_color_term = 239
 let g:indentLine_char = '¦'
+" none X terminal
+"let g:indentLine_color_tty_light = 7 " (default: 4)
+"let g:indentLine_color_dark = 1 " (default: 2)
+"let g:indentLine_concealcursor = 'vc' "(default 'inc')
+"let g:indentLine_conceallevel = 0 "(default 2)
 
 
 ""--------------------------------------------------------------------
@@ -515,7 +536,7 @@ inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
 inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ?   '<Esc>i<Right>' : '<Esc>i') : '') .
         \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\  <lt>Down>" : ""<CR>'
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 "*****************************************************
 ""                     xptemplate                    *
@@ -580,6 +601,7 @@ let g:clang_memory_percent=70 " Limit memory use
 let g:clang_snippets = 1
 let g:clang_snippets_engine = 'clang_complete'
 " let g:clang_snippets_engine = 'ultisnips'
+let g:clang_complete_optional_args_in_snippets = 1
 
 " Complete options (disable preview scratch window, longest removed to aways show menu)
 set completeopt=menu,menuone
@@ -593,7 +615,7 @@ imap <C-j>  <esc><tab>
 " imap <F1>  <esc><tab>
 
 " nnoremap <Leader>q :call g:ClangUpdateQuickFix()<CR>
-ino <a-s> <esc>:call Show_error()<cr>a
+ino <a-s> <esc>:call Show_error()<cr>
 nno <a-s> <esc>:call Show_error()<cr>
 func! Show_error()
    wall
@@ -624,6 +646,7 @@ let g:acp_behaviorKeywordLength = 2
 " let g:acp_refeed_checkpoints = [2]
 let g:acp_behavior = {
       \ 'c':    [],
+      \ 'x':    [],
       \ 'php':    [],
       \ 'ruby':   [],
       \ 'python': [],
@@ -711,6 +734,71 @@ elseif g:syntastic_objc_checker == "gcc" || g:syntastic_objc_checker == "clang"
         " runtime! syntax_checkers/objc/gcc.vim
     endif
 endif
+
+"*****************************************************
+""                      Vundle                       *
+"*****************************************************
+map <leader>F :FufFile<CR>
+map <leader>f :FufTaggedFile<CR>
+map <leader>g :FufTag<CR>
+map <leader>b :FufBuffer<CR>
+
+"*****************************************************
+""                      Conque-Shell                 *
+"*****************************************************
+let g:ConqueTerm_StartMessages = 0
+map <leader>ba :ConqueTermSplit bash<CR>
+map <leader>vb :ConqueTermVSplit bash<CR>
+
+"*****************************************************
+""                      cscope.vim                   *
+"*****************************************************
+nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+nnoremap <leader>fl :call ToggleLocationList()<CR>
+" s: Find this C symbol
+nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
+" g: Find this definition
+nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
+" d: Find functions called by this function
+nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
+" c: Find functions calling this function
+nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
+" t: Find this text string
+nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
+" e: Find this egrep pattern
+nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
+" f: Find this file
+nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
+" i: Find files #including this file
+nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
+
+"*****************************************************
+""                      easygit                      *
+"*****************************************************
+let g:easygit_enable_command = 1
+
+"*****************************************************
+""                      unite-gitlog                 *
+"*****************************************************
+"call unite#custom#profile('gitlog', 'context', {
+"  \  'start_insert': 0,
+"  \  'no_quit': 1,
+"  \  'vertical_preview': 1,
+"  \ })
+"nnoremap <Leader>gl :Unite -buffer-name=gitlog   gitlog<cr>
+
+"*****************************************************
+""                     vim-scripts/winmanager        *
+"*****************************************************
+" 设置winmanager
+" " 设置界面分割
+let g:winManagerWindowLayout = "TagList|FileExplorer"
+" "设置winmanager的宽度，默认为25
+let g:winManagerWidth = 30
+" "定义打开关闭winmanager快捷键为F8
+nmap <silent> <F8> :WMToggle<cr>
+" "在进入vim时自动打开winmanager
+" let g:AutoOpenWinManager = 1
 
 "*****************************************************
 ""                      Vundle                       *

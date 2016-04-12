@@ -35,7 +35,9 @@ def getBuiltinHeaderPath(library_path):
           library_path + "/clang",         # opensuse
           library_path + "/",              # Google
           "/usr/lib64/clang",              # x86_64 (openSUSE, Fedora)
-          "/usr/lib/clang"
+          "/home/anton/etc/clang/lib/clang/3.3/include",
+          "/usr/lib/clang",
+          "/home/anton/etc/clang/include"
   ]
 
   for path in knownPaths:
@@ -46,7 +48,7 @@ def getBuiltinHeaderPath(library_path):
         subDir = files[-1]
       else:
         subDir = '.'
-      path = path + "/" + subDir + "/include/"
+      #path = path + "/" + subDir + "/include/"
       arg = "-I" + path
       if canFindBuiltinHeaders(index, [arg]):
         return path

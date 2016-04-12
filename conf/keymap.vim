@@ -80,13 +80,13 @@ autocmd TabLeave * let g:last_active_tab = tabpagenr()
 
 " fast edite and resource .vimrc
 nnoremap <Leader>x  :tabedit ~/.vimrc<CR>                  " Fast edit the .vimrc file using ,x
-nnoremap <Leader>b  :tabedit ~/.vim/conf/bundle.vim<CR>  " Fast edit the .vimrc file using ,x
+nnoremap <Leader>v  :tabedit ~/.vim/conf/bundle.vim<CR>  " Fast edit the .vimrc file using ,x
 nnoremap <Leader>p  :tabedit ~/.vim/conf/plugin.vim<CR>  " Fast edit the .vimrc file using ,x
 nnoremap <Leader>k  :tabedit ~/.vim/conf/keymap.vim<CR>  " Fast edit the .vimrc file using ,x
 nnoremap <Leader>rs :source ~/.vimrc<CR>
 
 " Space to toggle and create folds.
-nnoremap <silent> <Space> @=(foldlevel('.') ? 'za' : '\<Space>')<CR>
+" nnoremap <silent> <Space> @=(foldlevel('.') ? 'za' : '\<Space>')<CR>
 vnoremap <Space> zf
 
 " Select entire buffer
@@ -133,5 +133,11 @@ nnoremap J mzJ`z
 command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
             \ | diffthis | wincmd p | diffthis
 
+
+" word search and replace
+" Make a simple "search" text object.
+vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
+    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
+nmap s :normal vs<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

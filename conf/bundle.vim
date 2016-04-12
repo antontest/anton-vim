@@ -53,25 +53,35 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin Running
 "" others
 """""""""""""""""""""""""""""""""""""""""
-Bundle 'itchyny/calendar.vim'
-Bundle 'vim-scripts/sessionman.vim'
+" Bundle 'itchyny/calendar.vim'
+" Bundle 'vim-scripts/sessionman.vim'
+" Bundle 'bogado/file-line'
+" Bundle 'amitab/vim-unite-cscope'
+" Bundle 'Shougo/unite.vim'
+" Bundle 'Shougo/vimproc.vim'
+" Bundle 'brookhong/cscope.vim'
 Bundle 'AndrewRadev/splitjoin.vim'
+Bundle 'oplatek/Conque-Shell'
+Bundle 'vim-scripts/FuzzyFinder'
+Bundle 'vim-scripts/vcscommand.vim'
 
 "" status and list bar
 """"""""""""""""""""""""""""""""""""""
 Bundle 'vim-scripts/taglist.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'bling/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
 Bundle 'vim-scripts/undotree.vim'
 Bundle 'scrooloose/nerdtree'
-Bundle 'wellle/targets.vim'
-Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'vim-scripts/winmanager'
+" Bundle 'wellle/targets.vim'
 
 "" code style
 Bundle 'godlygeek/tabular'
 Bundle 'luochen1990/rainbow'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'Yggdroot/indentLine'
+" Bundle 'nathanaelkane/vim-indent-guides'
 
 "" easy move, match and find
 """""""""""""""""""""""""""""""""""""""""
@@ -82,19 +92,26 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'kristijanhusak/vim-multiple-cursors'
 Bundle 'terryma/vim-expand-region'
+Bundle 'tybenz/ctrl-z'
 
 "" git amd man enhance
 """""""""""""""""""""""""""""""""""""""""
 Bundle 'tpope/vim-fugitive'
-" Bundle 'airblade/vim-gitgutter'
-Bundle 'vim-utils/vim-man'
+Bundle 'vim-scripts/gitignore'
+Bundle 'chemzqm/vim-easygit'
+Bundle 'chemzqm/unite-git-log'
 Bundle 'mhinz/vim-signify'
+" Bundle 'airblade/vim-gitgutter'
+" Bundle 'vim-utils/vim-man'
+" Bundle 'vim-scripts/CaptureClipboard'
+" Bundle 'jeetsukumaran/vim-buffergator'
+" Bundle 'vim-scripts/sh.vim--Cla'
 
 "" code comment
 """""""""""""""""""""""""""""""""""""""""
 Bundle 'vim-scripts/a.vim'
 Bundle 'vim-scripts/DoxygenToolkit.vim'
-Bundle 'scrooloose/nerdcommenter'
+" Bundle 'scrooloose/nerdcommenter'
 
 "" code auto complete
 """""""""""""""""""""""""""""""""""""""""
@@ -107,10 +124,10 @@ Bundle 'vim-scripts/AutoComplpop'
 Bundle 'Rip-Rip/clang_complete'
 Bundle 'scrooloose/syntastic'
 Bundle 'vim-scripts/echofunc.vim'
+" Bundle 'vim-scripts/TTrCodeAssistor'
 " Bundle 'terhechte/syntastic'
 " Bundle 'marcweber/vim-addon-mw-utils'
 " Bundle 'tomtom/tlib_vim'
-" Bundle 'vim-scripts/TTrCodeAssistor'
 " Bundle 'guns/ultisnips'
 " Bundle 'vim-scripts/autoproto.vim'
 

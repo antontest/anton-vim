@@ -178,8 +178,8 @@ set formatoptions+=rnlmM        " Optimize format options
 set wrap                        " Set wrap
 set textwidth=80                " Change text width
 
-"set list                                           " Show these tabs and spaces and so on
-"set listchars=tab:?\ ,eol:?,extends:?,precedes:?   " Change listchars
+" set list                                           " Show these tabs and spaces and so on
+" set listchars=tab:?\ ,eol:?,extends:?,precedes:?   " Change listchars
 set linebreak                                       " Wrap long lines at a blank
 set showbreak=?                                     " Change wrap line break
 set fillchars=diff:?,vert:│                         " Change fillchars
@@ -188,6 +188,22 @@ augroup trailing                                    " Only show trailing whitesp
     autocmd InsertEnter * :set listchars-=trail:?
     autocmd InsertLeave * :set listchars+=trail:?
 augroup END
+
+" 相对行号: 行号变成相对，可以用 nj/nk 进行跳转
+"set relativenumber number
+"au FocusLost * :set norelativenumber number
+"au FocusGained * :set relativenumber
+" 插入模式下用绝对行号, 普通模式下用相对
+"autocmd InsertEnter * :set norelativenumber number
+"autocmd InsertLeave * :set relativenumber
+"function! NumberToggle()
+"    if(&relativenumber == 1)
+"        set norelativenumber number
+"    else
+"        set relativenumber
+"    endif
+"endfunc
+"nnoremap `n :call NumberToggle()<cr>
 
 " 设置标记一列的背景颜色和数字一行颜色一致
 hi! link SignColumn   LineNr
@@ -347,8 +363,8 @@ function! s:VSetSearch()
 endfunction
 
 " Use sane regexes, Search Related 
-nnoremap / /\v
-vnoremap / /\v
+" nnoremap / /\v
+" vnoremap / /\v
 cnoremap s/ s/\v
 nnoremap ? ?\v
 vnoremap ? ?\v
@@ -386,5 +402,121 @@ function! MyFoldText()
     return line.'…'.repeat(' ',fillcharcount).foldedlinecount.'L'.' '
 endfunction
 set foldtext=MyFoldText()
+
+" quickfix的使用, 回车跳转到报错点, s或v分屏打开
+" In the quickfix window, <CR> is used to jump to the error under the
+" cursor, so undefine the mapping there.
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+" quickfix window  s/v to open in split window,  ,gd/,jd => quickfix window =>
+" open it
+autocmd BufReadPost quickfix nnoremap <buffer> v <C-w><Enter><C-w>L
+autocmd BufReadPost quickfix nnoremap <buffer> s <C-w><Enter><C-w>K
+
+" 关闭方向键, 强迫自己用 hjkl
+" map <Left> <Nop>
+" map <Right> <Nop>
+" map <Up> <Nop>
+" map <Down> <Nop>
+
+" F2 行号开关，用于鼠标复制代码用
+" 为方便复制，用<F2>开启/关闭行号显示:
+nnoremap <F2> :set nu!<CR>
+" F4 换行开关
+nnoremap <F3> :set wrap! wrap?<CR>
+set pastetoggle=<F4>            "    when in insert mode, press <F5> to go to
+                                "    paste mode, where you can paste mass data
+                                "    that won't be autoindented
+" disbale paste mode when leaving insert mode 
+au InsertLeave * set nopaste
+" F6 语法开关，关闭语法可以加快大文件的展示
+nnoremap <F5> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+
+" 多窗口编辑时, 临时放大某个窗口, 编辑完再切回原来的布局
+" http://stackoverflow.com/questions/13194428/is-better-way-to-zoom-windows-in-vim-than-zoomwin
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <Leader>z :ZoomToggle<CR>
+
+" 分号映射为冒号, 省得要进入命令模式需要按shift 
+" Map ; to : and save a million keystrokes 用于快速进入命令行
+nnoremap ; :
+
+" H和L跳转到行首行末, 实在不想按0和$, 太远 
+" Go to home and end using capitalized directions
+noremap H ^
+noremap L $
+
+" 命令行模式快捷键, ctrl-a/e跳转到行首行尾
+cnoremap <C-j> <t_kd>
+cnoremap <C-k> <t_ku>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+
+" 交换#和*, #更近
+" switch # *
+nnoremap # *
+nnoremap * #
+
+" 调整缩进后自动选中，方便再次操作
+vnoremap < <gv
+vnoremap > >gv
+
+" 复制动作的变更, Y, 复制到行末
+" y$ -> Y Make Y behave like other capitals
+map Y y$
+
+" 选中全部/选中段落 
+" select all
+" map <Leader>sa ggVG"
+" select block
+nnoremap <leader>v V`}
+
+" 保存, 没权限的时候 
+" w!! to sudo & write a file
+cmap w!! w !sudo tee >/dev/null %
+
+" 设置可以高亮的关键字
+if has("autocmd")
+    " Highlight TODO, FIXME, NOTE, etc.
+    if v:version > 701
+        autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|DONE\|XXX\|BUG\|HACK\)')
+        autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|NOTICE\)')
+    endif
+endif
+
+" 其他一些设置 
+" 启动的时候不显示那个援助索马里儿童的提示 
+set shortmess=atI
+" 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制, 不需要可以去掉 
+" 好处：误删什么的，如果以前屏幕打开，可以找回 
+" set t_ti= t_te= 
+" 鼠标暂不启用, 键盘党.... 
+set mouse-=a 
+
+" 设置标记一列的背景颜色和数字一行颜色一致
+hi! link SignColumn   LineNr
+hi! link ShowMarksHLl DiffAdd
+hi! link ShowMarksHLu DiffChange 
+
+" for error highlight，防止错误整行标红导致看不清 
+highlight clear SpellBad
+highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
+highlight clear SpellCap
+highlight SpellCap term=underline cterm=underline
+highlight clear SpellRare
+highlight SpellRare term=underline cterm=underline
+highlight clear SpellLocal
+highlight SpellLocal term=underline cterm=underline
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
