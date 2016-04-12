@@ -696,6 +696,8 @@ let g:syntastic_style_warning_symbol = '~~'
 
 " Read the clang complete file
 let g:syntastic_objc_config_file = '.clang_complete'
+let g:syntastic_c_config_file = '.clang_complete'
+let g:syntastic_cpp_config_file = '.clang_complete'
 
 " Status line configuration
 set statusline+=%#warningmsg#  " Add Error ruler.
