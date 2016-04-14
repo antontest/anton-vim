@@ -825,6 +825,42 @@ nmap <silent> <F8> :WMToggle<cr>
 " let g:AutoOpenWinManager = 1
 
 "*****************************************************
+""                      Markdown                     *
+"*****************************************************
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_folding_level = 6
+let g:vim_markdown_no_default_key_mappings = 1
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_emphasis_multiline = 0
+let g:vim_markdown_fenced_languages = ['csharp=cs']
+let g:vim_markdown_new_list_item_indent = 2
+
+"*****************************************************
+""                 vim-instant-markdown              *
+"*****************************************************
+let g:instant_markdown_slow = 1
+let g:instant_markdown_autostart = 0
+
+"*****************************************************
+""                      For Thunderbird              *
+"*****************************************************
+au FileType mail call FT_mail()
+function FT_mail()
+    set nocindent
+    set noautoindent
+    set textwidth=68
+    " reformat for 72 char lines
+    " normal gggqGgg
+    " settings
+    setlocal spell spelllang=en
+    " setlocal fileencoding=iso8859-1,utf-8
+    set fileencodings=iso8859-1,utf-8
+    " abbreviations
+    iabbr  gd Good Day!
+endfunction
+
+"*****************************************************
 ""                      Vundle                       *
 "*****************************************************
 " Vundle Key Binding

@@ -131,6 +131,12 @@ Bundle 'vim-scripts/echofunc.vim'
 " Bundle 'guns/ultisnips'
 " Bundle 'vim-scripts/autoproto.vim'
 
+"" markdown
+"""""""""""""""""""""""""""""""""""""""""
+Bundle 'plasticboy/vim-markdown'
+Bundle 'plasticboy/vim-markdown-hightlight'
+Bundle 'suan/vim-instant-markdown'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
