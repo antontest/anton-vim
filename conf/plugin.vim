@@ -541,7 +541,6 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 "*****************************************************
 ""                     xptemplate                    *
 "*****************************************************
-" let g:xptemplate_lib_filter = '~/.vim/UltiSnips/'
 " xptemplate
 let g:xptemplate_vars = "SParg=&BRfun="			" 代码紧贴括号,函数名单行
 " let g:xptemplate_brace_complete = "[{"		        " 括号引号自动补全	
@@ -833,7 +832,12 @@ let g:vim_markdown_folding_level = 6
 let g:vim_markdown_no_default_key_mappings = 1
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_emphasis_multiline = 0
-let g:vim_markdown_fenced_languages = ['csharp=cs']
+let g:vim_markdown_fenced_languages = ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini', 'csharp=cs']
+let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_math = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_new_list_item_indent = 2
 
 "*****************************************************
@@ -841,6 +845,20 @@ let g:vim_markdown_new_list_item_indent = 2
 "*****************************************************
 let g:instant_markdown_slow = 1
 let g:instant_markdown_autostart = 0
+
+"*****************************************************
+""                 vim-markdown-doc              *
+"*****************************************************
+"let g:mdtoc_starting_header_level = 2
+
+"*****************************************************
+""                 vim-flavored-markdown             *
+"*****************************************************
+"augroup markdown
+"    au!
+"    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+"augroup END
+
 
 "*****************************************************
 ""                      For Thunderbird              *
@@ -859,6 +877,54 @@ function FT_mail()
     " abbreviations
     iabbr  gd Good Day!
 endfunction
+
+"*****************************************************
+""                   closetag for html               *
+"*****************************************************
+" filenames like *.xml, *.html, *.xhtml, ...
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.md,*mkd"
+
+"*****************************************************
+""                MatchTagAlway for html             *
+"*****************************************************
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'md' : 1,
+    \ 'markdown' : 1,
+    \}
+highlight MatchTag ctermfg=black ctermbg=lightgreen guifg=black guibg=lightgreen
+let g:mta_use_matchparen_group = 0
+let g:mta_set_default_matchtag_color = 1
+nnoremap <leader>% :MtaJumpToOtherTag<cr>
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+" let g:html_indent_inctags = "html,body,head,tbody"
+
+"*****************************************************
+""                      mattn/emmet-vim              *
+"*****************************************************
+let g:user_emmet_mode='a'    "enable all function in all mode.
+let g:user_emmet_install_global = 0
+autocmd FileType html,css,md,markdown EmmetInstall
+let g:user_emmet_leader_key='<C-Z>'
+" let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.vim/.snippets_custom.json')), "\n"))
+  let g:user_emmet_settings = {
+    \  'php' : {
+    \    'extends' : 'html',
+    \    'filters' : 'c',
+    \  },
+    \  'xml' : {
+    \    'extends' : 'html',
+    \  },
+    \  'haml' : {
+    \    'extends' : 'html',
+    \  },
+    \  'md' : {
+    \    'extends' : ['md','mkd'],
+    \  },
+    \}
 
 "*****************************************************
 ""                      Vundle                       *

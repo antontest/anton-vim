@@ -133,9 +133,20 @@ Bundle 'vim-scripts/echofunc.vim'
 
 "" markdown
 """""""""""""""""""""""""""""""""""""""""
+" Bundle 'plasticboy/vim-markdown-hightlight'
+" Bundle 'ajorgensen/vim-markdown-toc'
+Bundle 'jtratner/vim-flavored-markdown'
 Bundle 'plasticboy/vim-markdown'
-Bundle 'plasticboy/vim-markdown-hightlight'
 Bundle 'suan/vim-instant-markdown'
+Bundle 'mzlogin/vim-markdown-toc'
+
+"" html
+"""""""""""""""""""""""""""""""""""""""""
+" Bundle 'gregsexton/MatchTag'
+" Bundle 'mattn/webapi-vim'
+Bundle 'alvan/vim-closetag'
+Bundle 'Valloric/MatchTagAlways'
+Bundle 'mattn/emmet-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
