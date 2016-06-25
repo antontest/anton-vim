@@ -212,8 +212,8 @@ vmap <Tab> %
 "*****************************************************
 let g:DoxygenToolkit_commentType="C"
 let g:DoxygenToolkit_authorName="Antonio_an"
-let s:licenseTag = "Copyright(C)\<enter>"
-let s:licenseTag = s:licenseTag . "For free\<enter>"
+let s:licenseTag = "Copyright(C)\<enter\>"
+let s:licenseTag = s:licenseTag . "For free\<enter\>"
 let s:licenseTag = s:licenseTag . "All right reserved"
 let g:DoxygenToolkit_licenseTag = s:licenseTag
 let g:DoxygenToolkit_briefTag_funcName="yes"
@@ -832,6 +832,7 @@ let g:vim_markdown_folding_level = 6
 let g:vim_markdown_no_default_key_mappings = 1
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_emphasis_multiline = 0
+let g:vim_markdown_conceal = 0
 let g:vim_markdown_fenced_languages = ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini', 'csharp=cs']
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_math = 1
