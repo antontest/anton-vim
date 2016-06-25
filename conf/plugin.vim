@@ -925,6 +925,15 @@ let g:user_emmet_leader_key='<C-Z>'
     \    'extends' : ['md','mkd'],
     \  },
     \}
+let vim_markdown_preview_github=1
+
+"*****************************************************
+""                      tComment                     *
+"*****************************************************
+map <leader>c <c-_><c-_>
+
+"Markdown to HTML
+nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <cr>
 
 "*****************************************************
 ""                      Vundle                       *

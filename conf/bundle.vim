@@ -111,6 +111,7 @@ Bundle 'mhinz/vim-signify'
 """""""""""""""""""""""""""""""""""""""""
 Bundle 'vim-scripts/a.vim'
 Bundle 'vim-scripts/DoxygenToolkit.vim'
+Bundle 'vim-scripts/tComment'
 " Bundle 'scrooloose/nerdcommenter'
 
 "" code auto complete
@@ -139,6 +140,7 @@ Bundle 'jtratner/vim-flavored-markdown'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'suan/vim-instant-markdown'
 Bundle 'mzlogin/vim-markdown-toc'
+Bundle 'JamshedVesuna/vim-markdown-preview'
 
 "" html
 """""""""""""""""""""""""""""""""""""""""
