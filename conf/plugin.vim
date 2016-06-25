@@ -934,7 +934,7 @@ let vim_markdown_preview_github=1
 map <leader>c <c-_><c-_>
 
 "Markdown to HTML
-nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <cr>
+nmap <leader>md :%!~/tools/markdown/Markdown.pl --html4tags <cr>
 
 "*****************************************************
 ""                      Vundle                       *
