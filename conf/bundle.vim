@@ -141,6 +141,7 @@ Bundle 'plasticboy/vim-markdown'
 Bundle 'suan/vim-instant-markdown'
 Bundle 'mzlogin/vim-markdown-toc'
 Bundle 'JamshedVesuna/vim-markdown-preview'
+Bundle 'gonzaloserrano/vim-markdown-todo'
 
 "" html
 """""""""""""""""""""""""""""""""""""""""
@@ -149,6 +150,10 @@ Bundle 'JamshedVesuna/vim-markdown-preview'
 Bundle 'alvan/vim-closetag'
 Bundle 'Valloric/MatchTagAlways'
 Bundle 'mattn/emmet-vim'
+
+"" html
+"""""""""""""""""""""""""""""""""""""""""
+Bundle 'PotatoesMaster/i3-vim-syntax'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

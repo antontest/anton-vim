@@ -859,7 +859,17 @@ let g:instant_markdown_autostart = 0
 "    au!
 "    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 "augroup END
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
+"*****************************************************
+""                 vim-markdown-preview              *
+"*****************************************************
+let vim_markdown_preview_toggle=1
+let vim_markdown_preview_browser='Firefox'
+" let vim_markdown_preview_use_xdg_open=1
+let vim_markdown_preview_temp_file=1
+" let vim_markdown_preview_github=1
+let vim_markdown_preview_hotkey='<C-m>'
 
 "*****************************************************
 ""                      For Thunderbird              *
@@ -934,7 +944,7 @@ let vim_markdown_preview_github=1
 map <leader>c <c-_><c-_>
 
 "Markdown to HTML
-nmap <leader>md :%!~/tools/markdown/Markdown.pl --html4tags <cr>
+nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <cr>
 
 "*****************************************************
 ""                      Vundle                       *

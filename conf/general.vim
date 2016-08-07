@@ -174,13 +174,14 @@ set scrolloff=3                 " Minimum lines to keep above and below cursor
 set sidescroll=1                " Minimal number of columns to scroll horizontally
 set sidescrolloff=10            " Minimal number of screen columns to keep away from cursor
 
-set formatoptions+=rnlmM        " Optimize format options
+" set formatoptions+=rnlmM        " Optimize format options
+set formatoptions+=mM        " Optimize format options
 set wrap                        " Set wrap
 set textwidth=80                " Change text width
 
 " set list                                           " Show these tabs and spaces and so on
 " set listchars=tab:?\ ,eol:?,extends:?,precedes:?   " Change listchars
-set linebreak                                       " Wrap long lines at a blank
+" set linebreak                                       " Wrap long lines at a blank
 set showbreak=?                                     " Change wrap line break
 set fillchars=diff:?,vert:│                         " Change fillchars
 augroup trailing                                    " Only show trailing whitespace when not in insert mode
@@ -310,6 +311,7 @@ set nowb
 set noswapfile  
 set nowritebackup
 set nobackup 
+" set nowrap
 
 " Session 
 set sessionoptions-=curdir
