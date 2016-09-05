@@ -12,9 +12,10 @@ filetype plugin indent on
 "*****************************************************
 ""                      Vim-Man                      *
 "*****************************************************
-map <C-m> <Plug>(Man) "open man page for word under cursor in a horizontal split
+" map <C-m> <Plug>(Vman) "open man page for word under cursor in a horizontal split
 " map <C-M> <Plug>(Vman) "open man page for word under cursor in a vertical split
-
+map <C-m> <Plug>(Man)
+map <C-M> <Plug>(Vman)
 
 "*****************************************************
 ""                     Calendar                      *
@@ -386,6 +387,8 @@ nmap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>    
 " nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>    
 " nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR><CR>
+" goto definition with F12
+map <F10> :cs find g <C-R>=expand("<cword>")<CR><CR>
 
 "*****************************************************
 ""                      ctrlp                        *
@@ -945,6 +948,11 @@ map <leader>c <c-_><c-_>
 
 "Markdown to HTML
 nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <cr>
+
+"*****************************************************
+""                      vscommand                    *
+"*****************************************************
+map <Leader>d :VCSVimDiff<cr>
 
 "*****************************************************
 ""                      Vundle                       *

@@ -140,4 +140,14 @@ vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
     \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
 nmap s :normal vs<CR>
 
+" switch between header/source with F4
+map <F4> :e %:p:s,.h$,.X123X,:s,.c$,.h,:s,.X123X$,.c,<CR>
+
+" in diff mode we use the spell check keys for merging
+map <C-j> ]c
+map <C-k> [c
+map <C-h> do
+map <C-l> dp
+map <F9> :new<CR>:read !svn diff<CR>:set syntax=diff buftype=nofile<CR>gg
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
