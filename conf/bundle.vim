@@ -1,162 +1,168 @@
-"*****************************************************
-""                 Vundle Setting                    *
-"*****************************************************
-set nocompatible              " be iMproved, required
-filetype off                  " required
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-" The following are examples of different formats supported.
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" Bundle 'gmarik/vundle'
-" Bundle 'sjl/gundo.vim'
-" Bundle 'vim-scripts/vcscommand.vim'
-" Bundle 'plasticboy/vim-markdown'
-" Bundle 'vim-scripts/TxtBrowser'
-" Bundle 'AndrewRadev/splitjoin.vim'
-" Bundle 'roman/golden-ratio'
-" Bundle 'Shougo/unite.vim'
-" Bundle 'Shougo/vimproc.vim'
-" Bundle 'vim-scripts/TaskList.vim'
-" Bundle 'honza/vim-snippets'
-" Bundle 'SirVer/ultisnips'
-" Bundle 'msanders/snipmate.vim'
-" Bundle 'scrooloose/syntastic'
-" Bundle 'fholgado/minibufexpl.vim'
-" Bundle 'Valloric/YouCompleteMe'
-" Bundle 'oblitum/YouCompleteMe'
-" Bundle 'vim-scripts/OmniCppComplete'
-" Bundle 'ervandew/supertab'
-" Bundle 'justmao945/vim-clang'
-" Bundle 'vim-scripts/c.vim'
-" Bundle 'bling/vim-bufferline'
-" Bundle 'plasticboy/vim-markdown'
-" Bundle 'gcmt/wildfire.vim'
-" Bundle 'jiangmiao/auto-pairs'
-" Bundle 'Shougo/neocomplcache.vim'
-" Bundle 'Shougo/neosnippet'
-" Bundle 'Shougo/neosnippet-snippets'
-" Bundle 'Shougo/vimshell.vim' 
-" Bundle 'vim-scripts/AutoComplPop'
-" Bundle 'garbas/vim-snipmate'
+" Plug 'gmarik/vundle'
+" Plug 'sjl/gundo.vim'
+" Plug 'vim-scripts/vcscommand.vim'
+" Plug 'plasticboy/vim-markdown'
+" Plug 'vim-scripts/TxtBrowser'
+" Plug 'AndrewRadev/splitjoin.vim'
+" Plug 'roman/golden-ratio'
+" Plug 'Shougo/unite.vim'
+" Plug 'Shougo/vimproc.vim'
+" Plug 'vim-scripts/TaskList.vim'
+" Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips'
+" Plug 'msanders/snipmate.vim'
+" Plug 'scrooloose/syntastic'
+" Plug 'fholgado/minibufexpl.vim'
+" Plug 'Valloric/YouCompleteMe'
+" Plug 'oblitum/YouCompleteMe'
+" Plug 'vim-scripts/OmniCppComplete'
+" Plug 'ervandew/supertab'
+" Plug 'justmao945/vim-clang'
+" Plug 'vim-scripts/c.vim'
+" Plug 'bling/vim-bufferline'
+" Plug 'plasticboy/vim-markdown'
+" Plug 'gcmt/wildfire.vim'
+" Plug 'jiangmiao/auto-pairs'
+" Plug 'Shougo/neocomplcache.vim'
+" Plug 'Shougo/neosnippet'
+" Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/vimshell.vim' 
+" Plug 'vim-scripts/AutoComplPop'
+" Plug 'garbas/vim-snipmate'
 
 " Plugin Running
 "" others
 """""""""""""""""""""""""""""""""""""""""
-" Bundle 'itchyny/calendar.vim'
-" Bundle 'vim-scripts/sessionman.vim'
-" Bundle 'bogado/file-line'
-" Bundle 'amitab/vim-unite-cscope'
-" Bundle 'Shougo/unite.vim'
-" Bundle 'Shougo/vimproc.vim'
-" Bundle 'brookhong/cscope.vim'
-Bundle 'AndrewRadev/splitjoin.vim'
-Bundle 'oplatek/Conque-Shell'
-Bundle 'vim-scripts/FuzzyFinder'
-Bundle 'vim-scripts/vcscommand.vim'
+" Plug 'itchyny/calendar.vim'
+" Plug 'vim-scripts/sessionman.vim'
+" Plug 'bogado/file-line'
+" Plug 'amitab/vim-unite-cscope'
+" Plug 'Shougo/unite.vim'
+" Plug 'Shougo/vimproc.vim'
+" Plug 'brookhong/cscope.vim'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'oplatek/Conque-Shell'
+Plug 'vim-scripts/FuzzyFinder'
+Plug 'vim-scripts/vcscommand.vim'
+" Plug 'myusuf3/numbers.vim'
 
 "" status and list bar
 """"""""""""""""""""""""""""""""""""""
-Bundle 'vim-scripts/taglist.vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'bling/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
-Bundle 'vim-scripts/undotree.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'vim-scripts/winmanager'
-" Bundle 'wellle/targets.vim'
+Plug 'vim-scripts/taglist.vim'
+Plug 'majutsushi/tagbar'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/undotree.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-scripts/winmanager'
+" Plug 'jistr/vim-nerdtree-tabs'
+" Plug 'itchyny/lightline.vim'
+" Plug 'wellle/targets.vim'
 
 "" code style
-Bundle 'godlygeek/tabular'
-Bundle 'luochen1990/rainbow'
-Bundle 'junegunn/vim-easy-align'
-Bundle 'Yggdroot/indentLine'
-" Bundle 'nathanaelkane/vim-indent-guides'
+Plug 'godlygeek/tabular'
+Plug 'luochen1990/rainbow'
+Plug 'junegunn/vim-easy-align'
+Plug 'Yggdroot/indentLine'
+Plug 'Chiel92/vim-autoformat'
+" Plug 'nathanaelkane/vim-indent-guides'
 
 "" easy move, match and find
 """""""""""""""""""""""""""""""""""""""""
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'edsono/vim-matchit'
-Bundle 'dkprice/vim-easygrep'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tpope/vim-surround'
-Bundle 'kristijanhusak/vim-multiple-cursors'
-Bundle 'terryma/vim-expand-region'
-Bundle 'tybenz/ctrl-z'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'edsono/vim-matchit'
+Plug 'dkprice/vim-easygrep'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-surround'
+Plug 'kristijanhusak/vim-multiple-cursors'
+Plug 'terryma/vim-expand-region'
+Plug 'tybenz/ctrl-z'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-function'
 
 "" git amd man enhance
 """""""""""""""""""""""""""""""""""""""""
-Bundle 'tpope/vim-fugitive'
-Bundle 'vim-scripts/gitignore'
-Bundle 'chemzqm/vim-easygit'
-Bundle 'chemzqm/unite-git-log'
-Bundle 'mhinz/vim-signify'
-Bundle 'vim-utils/vim-man'
-Bundle 'p/vcscommand'
-" Bundle 'airblade/vim-gitgutter'
-" Bundle 'vim-scripts/CaptureClipboard'
-" Bundle 'jeetsukumaran/vim-buffergator'
-" Bundle 'vim-scripts/sh.vim--Cla'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/gitignore'
+Plug 'chemzqm/vim-easygit'
+Plug 'chemzqm/unite-git-log'
+Plug 'mhinz/vim-signify'
+Plug 'vim-utils/vim-man'
+" Plug 'airblade/vim-gitgutter'
+" Plug 'vim-scripts/CaptureClipboard'
+" Plug 'jeetsukumaran/vim-buffergator'
+" Plug 'vim-scripts/sh.vim--Cla'
 
 "" code comment
 """""""""""""""""""""""""""""""""""""""""
-Bundle 'vim-scripts/a.vim'
-Bundle 'vim-scripts/DoxygenToolkit.vim'
-Bundle 'vim-scripts/tComment'
-" Bundle 'scrooloose/nerdcommenter'
+Plug 'vim-scripts/a.vim'
+Plug 'vim-scripts/DoxygenToolkit.vim'
+Plug 'vim-scripts/tComment'
+" Plug 'scrooloose/nerdcommenter'
 
 "" code auto complete
 """""""""""""""""""""""""""""""""""""""""
-Bundle 'tsaleh/vim-supertab'
-Bundle 'drmingdrmer/xptemplate' 
-Bundle 'xaizek/vim-inccomplete'
-Bundle 'vim-scripts/L9'
-Bundle 'tpope/vim-repeat'
-Bundle 'vim-scripts/AutoComplpop'
-Bundle 'Rip-Rip/clang_complete'
-Bundle 'scrooloose/syntastic'
-Bundle 'vim-scripts/echofunc.vim'
-" Bundle 'vim-scripts/TTrCodeAssistor'
-" Bundle 'terhechte/syntastic'
-" Bundle 'marcweber/vim-addon-mw-utils'
-" Bundle 'tomtom/tlib_vim'
-" Bundle 'guns/ultisnips'
-" Bundle 'vim-scripts/autoproto.vim'
+Plug 'tsaleh/vim-supertab'
+Plug 'drmingdrmer/xptemplate' 
+Plug 'xaizek/vim-inccomplete'
+Plug 'vim-scripts/L9'
+Plug 'tpope/vim-repeat'
+Plug 'vim-scripts/AutoComplpop'
+Plug 'Rip-Rip/clang_complete'
+Plug 'scrooloose/syntastic'
+Plug 'vim-scripts/echofunc.vim'
+" Plug 'vim-scripts/TTrCodeAssistor'
+" Plug 'terhechte/syntastic'
+" Plug 'marcweber/vim-addon-mw-utils'
+" Plug 'tomtom/tlib_vim'
+" Plug 'guns/ultisnips'
+" Plug 'vim-scripts/autoproto.vim'
 
 "" markdown
 """""""""""""""""""""""""""""""""""""""""
-" Bundle 'plasticboy/vim-markdown-hightlight'
-" Bundle 'ajorgensen/vim-markdown-toc'
-Bundle 'jtratner/vim-flavored-markdown'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'suan/vim-instant-markdown'
-Bundle 'mzlogin/vim-markdown-toc'
-Bundle 'JamshedVesuna/vim-markdown-preview'
-Bundle 'gonzaloserrano/vim-markdown-todo'
+" Plug 'plasticboy/vim-markdown-hightlight'
+" Plug 'ajorgensen/vim-markdown-toc'
+Plug 'jtratner/vim-flavored-markdown'
+Plug 'plasticboy/vim-markdown'
+Plug 'suan/vim-instant-markdown'
+Plug 'mzlogin/vim-markdown-toc'
+Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'gonzaloserrano/vim-markdown-todo'
+Plug 'junegunn/goyo.vim'
+Plug 'amix/vim-zenroom2'
 
 "" html
 """""""""""""""""""""""""""""""""""""""""
-" Bundle 'gregsexton/MatchTag'
-" Bundle 'mattn/webapi-vim'
-Bundle 'alvan/vim-closetag'
-Bundle 'Valloric/MatchTagAlways'
-Bundle 'mattn/emmet-vim'
+" Plug 'gregsexton/MatchTag'
+" Plug 'mattn/webapi-vim'
+Plug 'alvan/vim-closetag'
+Plug 'Valloric/MatchTagAlways'
+Plug 'mattn/emmet-vim'
+
+"" file
+"""""""""""""""""""""""""""""""""""""""""
+Plug 'amix/open_file_under_cursor.vim'
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'mhinz/vim-startify'
+" Plug 'kshenoy/vim-signature'   
 
 "" html
 """""""""""""""""""""""""""""""""""""""""
-Bundle 'PotatoesMaster/i3-vim-syntax'
+Plug 'PotatoesMaster/i3-vim-syntax'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+"" windows
+"""""""""""""""""""""""""""""""""""""""""
+Plug 'vim-scripts/ZoomWin'
+Plug 'christoomey/vim-tmux-navigator'
 
+"" color
+"""""""""""""""""""""""""""""""""""""""""
+Plug 'dracula/vim'
+Plug 'romainl/Apprentice'
+Plug 'flazz/vim-colorschemes'
+" Plug 'vim-scripts/c.vim'
+" Plug 'vim-scripts/std_c.zip'
+ 
+call plug#end()

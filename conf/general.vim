@@ -79,6 +79,7 @@ set cmdheight=1
 
 " intelligent comments
 set comments=sl:/*,mb:\ *,elx:\ */
+set cul " Highlight the current line   
 
 " Set directories
 function! InitializeDirectories()
@@ -271,36 +272,22 @@ augroup end
 ""                Colors and Fonts                   *
 "*****************************************************
 syntax on     " Enable syntax
-set t_Co=256  " Use 256 colors
 " syntax enable
 
 " Coding mode
 set encoding=utf-8        " Set utf-8 encoding
 set fencs=utf-8,gb18030 
+set termencoding=utf-8 
+set sessionoptions=blank,buffers,folds,help,resize,tabpages,winpos,winsize " Set session persistence options
+set noequalalways " Do not maintain window-size ratio (when having multiple window splits I don't find it desirable)
 
 " Automatic judge coding
 set fileformats=unix
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guifont=Monaco:h14
-    if has("gui_gtk2")   "GTK2
-        set guifont=Monaco\ 12,Monospace\ 12
-    endif
-    set guioptions-=T
-    set guioptions+=e
-    set guioptions-=r
-    set guioptions-=L
-    set guitablabel=%M\ %t
-    set showtabline=1
-    set linespace=2
-    set noimd
-    set t_Co=256
-endif
-
-set background=dark  "dark, light
-colorscheme mydy  
+set t_Co=256  " Use 256 colors
+colorscheme mydy
+set background=light "dark, light
 "Dracula peaksea fruit vylight taqua molokai winter tcsoft peachpuff lettuce ,kellys ,mustang dawn bclear habilight default nuvola zellner vc
 
 

@@ -107,11 +107,11 @@ hi IndentGuidesEven ctermbg=darkgrey
 ""                     echofunc                      *
 "*****************************************************
 let g:EchoFuncLangsUsed = ["c", "cpp", "java"] 
-"let g:EchoFuncShowOnStatus = 1 
+" let g:EchoFuncShowOnStatus = 1 
 " Key to echo the next function
-" let g:EchoFuncKeyNext = '<C-Space>'
+let g:EchoFuncKeyNext = '<A-=>'
 " Key to echo the prev function
-" let g:EchoFuncKeyPrev = '<C-S-Space>'
+let g:EchoFuncKeyPrev = '<A-\->'
 
 "*****************************************************
 ""                    Vim-Airline                    *
@@ -124,7 +124,7 @@ endif
 " unicode symbols
 let g:airline_left_sep='?'  " Slightly fancier than '>'
 let g:airline_right_sep='?' " Slightly fancier than '<'
-let g:airline_theme='simple'
+let g:airline_theme='murmur' " simple
 let g:bufferline_modified='[+]'
 let g:bufferline_echo=0
 set noshowmode " Hide the default mode text
@@ -133,15 +133,21 @@ set guifont=Ubuntu\ Mono\ derivative\ Powerline
 set laststatus=2
 set fillchars+=stl:\ ,stlnc:\
 " enable powerline-fonts
-let g:airline_powerline_fonts = 0
+let g:airline_powerline_fonts = 0 " Use Powerline fonts to show beautiful symbols
+let g:airline_inactive_collapse = 0 " Do not collapse the status line while having multiple windows
 " enable tabline
 let g:airline#extensions#tabline#enabled = 1
 " set left separator
 let g:airline#extensions#tabline#left_sep = ' '
 " set left separator which are not editting
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#symbol = '!'
+
+let g:airline#extensions#whitespace#enabled = 0             " Do not check for whitespaces
+let g:airline#extensions#tabline#enabled = 1                " Display tab bar with buffers
+let g:airline#extensions#branch#enabled = 1                 " Enable Git client integration
+let g:airline#extensions#tagbar#enabled = 1                 " Enable Tagbar integration
+let g:airline#extensions#hunks#enabled = 1 " Enable Git hunks integration
 
 function! AirlineInit()
 	let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -232,11 +238,6 @@ let g:doxygen_enhanced_color=1
 "*****************************************************
 " tag files path
 set tags=tags;
-set tags+=~/tools/tags/tools.tags;
-set tags+=~/tools/tags/usr_include_std.tags
-set tags+=~/tools/tags/usr_include_str_time.tags
-set tags+=~/tools/tags/usr_include_net.tags
-set tags+=~/tools/tags/usr_include_sys.tags
 " set tags+=~/.vim/systags;
 set autochdir 
 
@@ -249,14 +250,14 @@ function! UpdateCtags()
         endif
     endwhile
     if filewritable("./tags")
-        !ctags -R --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+p --fields=+liaS --extra=+q
+        !ctags -R --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p+d+e+f+l+s+t+u+v --c++-kinds=+p+d+e+f+l+s+t+u+v --fields=+liaS --extra=+q
         TlistUpdate
     endif
     execute ":cd " . curdir
 endfunction
 
 " ctags Key Binding
-nmap <F10> :call UpdateCtags()<CR>
+nmap <C-c> :call UpdateCtags()<CR>
 " map <F5> :!ctags -R --c++-kinds=+p --fields=+liaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 
 
@@ -288,12 +289,44 @@ let g:tagbar_foldlevel=2
 let g:tagbar_autoshowtag=1
 let g:tagbar_zoomwidth = 0
 let g:tagbar_sort = 0
+let g:tagbar_type_c = {
+    \ 'kinds' : [
+         \ 'c:classes:0:1',
+         \ 'd:macros:0:1',
+         \ 'e:enumerators:0:0', 
+         \ 'g:enumeration:0:1',
+         \ 'm:members:0:1',
+         \ 'n:namespaces:0:1',
+         \ 's:structs:0:1',
+         \ 't:typedefs:0:1',
+         \ 'u:unions:0:1',
+         \ 'v:global:0:1',
+         \ 'x:external:0:1',
+         \ 'f:functions:0:1'
+     \ ],
+     \ 'sro'        : '::',
+     \ 'kind2scope' : {
+         \ 'g' : 'enum',
+         \ 'n' : 'namespace',
+         \ 'c' : 'class',
+         \ 's' : 'struct',
+         \ 'u' : 'union'
+     \ },
+     \ 'scope2kind' : {
+         \ 'enum'      : 'g',
+         \ 'namespace' : 'n',
+         \ 'class'     : 'c',
+         \ 'struct'    : 's',
+         \ 'union'     : 'u'
+     \ }
+     \ }
+
 " autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 
 "*****************************************************
 ""                     NERDTree                      *
 "*****************************************************
-let NERDTreeWinPos = 'left'     " left
+let NERDTreeWinPos = 'right'     " left
 let NERDTreeChDirMode=2          "选中root即设置为当前目录
 let NERDTreeQuitOnOpen=1         "打开文件时关闭树
 let NERDTreeShowBookmarks=1      "显示书签
@@ -305,13 +338,15 @@ let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 let nerdtree_tabs_open_on_gui_startup=0
 " NERDTree Key Binding
-nnoremap <Leader>d :NERDTreeToggle<CR>
+nnoremap <Leader>e :NERDTreeToggle<CR>
 " nnoremap <Leader>f :NERDTreeFind<CR>
 
 
 "*****************************************************
 ""                     undotree                      *
 "*****************************************************
+" 设置环境保存项
+set sessionoptions="blank,buffers,globals,localoptions,tabpages,sesdir,folds,help,options,resize,winpos,winsize"
 let g:undotree_SetFocusWhenToggle=1
 set undodir='~/.undodir/'
 set undofile
@@ -576,8 +611,11 @@ let g:xptemplate_fallback = 'nore:<TAB>' " Optional. Use this only when you have
 "*****************************************************
 ""                  clang_complete                   *
 "*****************************************************
+set complete-=t                                             " Do not search tag files when auto-completing
+set completeopt=menu,menuone                                " Complete options (disable preview scratch window, longest removed to aways show menu)
+set pumheight=20 " Limit popup menu height
 set conceallevel=2
-set concealcursor=vin
+set concealcursor=inv
 let g:clang_auto_select=1       " 弹出补全列表之后会自动选择第一个选项但不会生效
 let g:clang_complete_auto=1 
 let g:clang_complete_copen=0    " 该变量控制语法错误检查后是否打开quickfix窗口列表. 默认值是0表示不打开
@@ -588,6 +626,7 @@ let g:clang_user_options=''
 let g:clang_auto_user_options=".clang_complete"
 let g:clang_use_library=1
 " let g:clang_library_path="~/etc/lib"
+let g:clang_user_options='|| exit 0'
 let g:clang_sort_algo="priority"
 let g:clang_complete_macros=1
 let g:clang_complete_patterns=0
@@ -626,6 +665,20 @@ func! Show_error()
    endif
 endfunc
 
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+            \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>
+
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+            \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>
+
+" open omni completion menu closing previous if open and opening new   menu without changing the text
+" "inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ?   '<Esc>i<Right>' : '<Esc>i') : '') .
+"         \ '<C-x><C-o><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\  <lt>Down>" : ""<CR>'
+" open user completion menu closing previous if open and opening new   menu without changing the text
+inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ?   '<Esc>i<Right>' : '<Esc>i') : '') .
+    \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\  <lt>Down>" : ""<CR>'
+
 
 "*****************************************************
 ""                   AutoComplPop                    *
@@ -640,10 +693,10 @@ let g:AutoComplPop_CompleteoptPreview = 1
 " let g:acp_behaviorSnipmateLength = 2
 let g:acp_behaviorFileLength = 2
 let g:acp_behaviorKeywordLength = 2
-" let g:clang_exec='~/etc/bin/clang'
+let g:clang_exec='~/etc/bin/clang'
  "color  
-" hi Pmenu guibg=#444444  
-" hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff  
+hi Pmenu guibg=#444444  
+hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff  
 
 " let g:acp_refeed_checkpoints = [2]
 let g:acp_behavior = {
@@ -818,13 +871,33 @@ let g:easygit_enable_command = 1
 "*****************************************************
 " 设置winmanager
 " " 设置界面分割
-let g:winManagerWindowLayout = "TagList|FileExplorer"
+" let g:winManagerWindowLayout = "TagList|FileExplorer"
+let g:winManagerWindowLayout='Tagbar|NERDTree'
 " "设置winmanager的宽度，默认为25
 let g:winManagerWidth = 30
 " "定义打开关闭winmanager快捷键为F8
 nmap <silent> <F8> :WMToggle<cr>
 " "在进入vim时自动打开winmanager
 " let g:AutoOpenWinManager = 1
+let g:NERDTree_title = "[NERDTree]"
+function! NERDTree_Start()
+    exe 'q' 
+    exe 'NERDTree'
+endfunction
+
+function! NERDTree_IsValid()
+    return 1
+endfunction
+
+let g:Tagbar_title = "[Tagbar]"
+function! Tagbar_Start()
+    exe 'q'
+    exe 'TagbarOpen'
+endfunction
+
+function! Tagbar_IsValid()
+    return 1
+endfunction
 
 "*****************************************************
 ""                      Markdown                     *
@@ -955,10 +1028,96 @@ nmap <leader>md :%!/usr/local/bin/Markdown.pl --html4tags <cr>
 map <Leader>d :VCSVimDiff<cr>
 
 "*****************************************************
-""                      Vundle                       *
+""                   lightline.vim                   *
+"*****************************************************
+set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))'
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+
+"*****************************************************
+""                      goyo                         *
+"*****************************************************
+function! s:goyo_enter()
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+    set noshowmode
+    set noshowcmd
+    set scrolloff=999
+    " ...
+endfunction
+
+function! s:goyo_leave()
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+    set showmode
+    set showcmd
+    set scrolloff=5
+    " ...
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+nnoremap <silent> <leader>z :Goyo<cr>
+
+"*****************************************************
+""                  vim-signature                    *
+"*****************************************************
+let g:SignatureMap = {
+        \ 'Leader'             :  "m",
+        \ 'PlaceNextMark'      :  "m,",
+        \ 'ToggleMarkAtLine'   :  "m.",
+        \ 'PurgeMarksAtLine'   :  "m-",
+        \ 'DeleteMark'         :  "dm",
+        \ 'PurgeMarks'         :  "mda",
+        \ 'PurgeMarkers'       :  "m<BS>",
+        \ 'GotoNextLineAlpha'  :  "']",
+        \ 'GotoPrevLineAlpha'  :  "'[",
+        \ 'GotoNextSpotAlpha'  :  "`]",
+        \ 'GotoPrevSpotAlpha'  :  "`[",
+        \ 'GotoNextLineByPos'  :  "]'",
+        \ 'GotoPrevLineByPos'  :  "['",
+        \ 'GotoNextSpotByPos'  :  "mn",
+        \ 'GotoPrevSpotByPos'  :  "mp",
+        \ 'GotoNextMarker'     :  "[+",
+        \ 'GotoPrevMarker'     :  "[-",
+        \ 'GotoNextMarkerAny'  :  "]=",
+        \ 'GotoPrevMarkerAny'  :  "[=",
+        \ 'ListLocalMarks'     :  "ms",
+        \ 'ListLocalMarkers'   :  "m?"
+        \ }
+
+"*****************************************************
+""                  vim-bookmarks                    *
+"*****************************************************
+highlight BookmarkSign ctermbg=NONE ctermfg=160
+highlight BookmarkLine ctermbg=199 ctermfg=NONE
+let g:bookmark_highlight_lines = 1
+
+"*****************************************************
+""                  vim-autoformat                   *
+"*****************************************************
+let g:formatterpath = [ '/usr/bin/astyle' ]
+let g:formatdef_my_custom_cs = '"astyle --style=kr --mode=c -Z -z2 -c --indent=spaces --break-blocks=all --pad-oper --indent-switches --indent-cases --unpad-paren --convert-tabs -U -X "'
+noremap <Leader>f :Autoformat<CR>
+
+"*****************************************************
+""                    vim-plug                       *
 "*****************************************************
 " Vundle Key Binding
-nnoremap <Leader>bl :BundleList<CR> 
-nnoremap <Leader>bd :BundleInstall<CR> 
-nnoremap <Leader>bu :BundleUpdate<CR> 
-nnoremap <Leader>bc :BundleClean<CR> 
+nnoremap <Leader>ps :PlugSnapshot<CR> 
+nnoremap <Leader>ps :PlugStatus<CR> 
+nnoremap <Leader>pi :PlugInstall<CR> 
+nnoremap <Leader>pu :PlugUpdate<CR> 
+nnoremap <Leader>pc :PlugClean<CR> 
+nnoremap <Leader>pd :PlugDiff<CR> 

@@ -142,12 +142,13 @@ nmap s :normal vs<CR>
 
 " switch between header/source with F4
 map <F4> :e %:p:s,.h$,.X123X,:s,.c$,.h,:s,.X123X$,.c,<CR>
+map <C-w> :e %:p:s,.h$,.X123X,:s,.c$,.h,:s,.X123X$,.c,<CR>
 
 " in diff mode we use the spell check keys for merging
-map <C-j> ]c
-map <C-k> [c
-map <C-h> do
-map <C-l> dp
+map <leader>j ]c
+map <leader>k [c
+map <leader>h do
+map <leader>l dp
 map <F9> :new<CR>:read !svn diff<CR>:set syntax=diff buftype=nofile<CR>gg
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
